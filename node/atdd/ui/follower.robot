@@ -1,5 +1,5 @@
 ***Settings***
-Library seleniumLibrary
+Library    SeleniumLibrary
 Suite Teardown    Close Browser
 ****Variables***
 ${HOST}    http://localhost:3000
@@ -11,20 +11,22 @@ Find Followers of Pichaya
     Open Browser and Go to Find Followers's Site
     Search by Pichaya's name
     Results should be 3 Followers
-    First Follower is anakinnet
-    Second Follower is getlinks
-    Third Follower is dev-getlinks
+    Follower is anakinnet
+    Follower is Tedev555
+    Follower is pleum
 ***Keywords***
 Open Browser and Go to Find Followers's Site
     Open Browser    ${URL}    ${BROWSER}
 Search by Pichaya's name
     Input Text    id=celebrity    ${CELEBRITY}
+    Click Button    id=submit
 Results should be 3 Followers
+    Wait Until Element Is Visible    class:follower
     ${count} =	Get Element Count	class:follower
     Should Be True	${count} > 2	
-First Follower is anakinnet
+Follower is anakinnet
     Wait Until Element Contains    followers    anakinnet
-Second Follower is getlinks
-    Wait Until Element Contains    followers    getlinks
-Third Follower is dev-getlinks
-    Wait Until Element Contains    followers    dev-getlinks
+Follower is Tedev555
+    Wait Until Element Contains    followers    Tedev555
+Follower is pleum
+    Wait Until Element Contains    followers    pleum
