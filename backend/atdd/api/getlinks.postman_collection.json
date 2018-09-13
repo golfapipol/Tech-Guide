@@ -1,0 +1,115 @@
+{
+	"info": {
+		"_postman_id": "dd83b475-cbf0-4fa0-bc49-50df3c20c8bd",
+		"name": "getlinks",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register member",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "55b5937e-b08b-4ce7-b9f2-fd51619014a7",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"member's email should be golf.apipol@gmail.com\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.email).to.eql(\"golf.apipol@gmail.com\");",
+							"});",
+							"",
+							"pm.test(\"member's fullname should be Apipol Sukgler\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.fullname).to.eql(\"Apipol Sukgler\");",
+							"});",
+							"",
+							"pm.test(\"member's phone should be 0853872788\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.phone).to.eql(\"0853872788\");",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"golf.apipol@gmail.com\",\n\t\"password\": \"123456789\",\n\t\"fullname\": \"Apipol Sukgler\",\n\t\"phone\": \"0853872788\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/members/register",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"members",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login member",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dceb02fa-69cc-4f61-9b4c-312b65d5cbe5",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"token should be exist\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(!jsonData.token).to.eql(false);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"golf.apipol@gmail.com\",\n\t\"password\": \"123456789\"\n}"
+				},
+				"url": {
+					"raw": "{{HOST}}/api/v1/members/login",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"members",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
