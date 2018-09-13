@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Github Followers Finder</title>
+</head>
+<body>
+    <input type="text" id="celebrity">
+    <button type="submit" id="submit" onclick="followersFinder()">Submit</button>
+    <table bgcolor="grey">
+        <thead bgcolor="white">
+            <th>avatar</th>
+            <th width="100px">login</th>
+            <th width="200px">url</th>
+        </thead>
+        <tbody bgcolor="white" id="followers"></tbody>
+    </table>
+    <script>
+        const url = 'https://api.github.com/users/'
+        const followersFinder = () => fetch(`${url}${document.getElementById("celebrity").value}/followers`)
+            .then((resp) => resp.json()) 
+            .then((followers) => {
+                document.getElementById("followers").innerHTML = ""
+                followers.forEach(follower => {
+                    // symbol `` not support src attribute 
+                    tableRow = "<tr class=\"follower\">"
+                            +"<td class=\"avatar\"><img src=\""+ follower.avatar_url + "\" width=\"40px\"/></td>"
+                            +`<td class=\"account\">${follower.login}</td><td class="url">${follower.html_url}</td>`
+                            +"</tr>"   
+                    document.getElementById("followers").innerHTML += tableRow
+                });
+
+            })
+    
+    </script>
+</body>
+</html>
