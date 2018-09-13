@@ -1,0 +1,26 @@
+.rounded-circle {
+    border-radius: 50% !important;
+}
+
+.header {
+    margin-top: 4rem;
+}
+
+.header .text-center .container{
+    margin:4em;
+}
+
+main .jumbotron{
+    padding: 100px 0;
+}
+
+main .album{
+    padding: 50px 0;
+}
+
+footer{
+    background-color:#eee;
+}
+footer ul{
+    list-style: none;
+}
