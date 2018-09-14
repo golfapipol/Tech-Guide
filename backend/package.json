@@ -4,14 +4,20 @@
   "description": "Please push your code to your Github and send the link to pichaya@getlinks.co",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run unit:test && npm run e2e:test",
+    "unit:test": "jest",
+    "pree2e:test": "node ./index.js &",
+    "e2e:test": "newman run ./atdd/api/getlinks.postman_collection.json",
+    "poste2e:test": "kill $(ps aux | grep '[n]ode ./index.js' | awk '{print $2}')"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "jsonwebtoken": "^8.3.0",
     "restify": "^7.2.1"
   },
   "devDependencies": {
+    "jest-cli": "^23.6.0",
     "newman": "^4.1.0"
   }
 }
