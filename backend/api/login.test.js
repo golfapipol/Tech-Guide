@@ -7,17 +7,14 @@ const mockResponse = jest.fn(() => {
     }
     return {
         send: (status,json) => {
-            console.log("status", status, "json", json)
             if (!json) {
                 json = status
                 status = 200
             }
             response.data = json
             response.statusCode = status
-            console.log("response", response)
         },
         json: () => {
-            console.log("json response", response)
             return response.data
         },
         status: () => response.statusCode
@@ -39,6 +36,7 @@ describe('LoginHandler', () => {
             expiredAt: 1536944575901,
             issuedAt: 1536944515901,
         }
+        expectedStatus = 200
         jsonData = {
             email: "golf.apipol@gmail.com",
             password: "123456789"
