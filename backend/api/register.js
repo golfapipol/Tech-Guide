@@ -14,7 +14,6 @@ const RegisterHandler = (MemberService) =>
                 response.send(400, { response: err })
                 return next()
             })
-        return Promise.resolve(next())
     }
 
 module.exports = RegisterHandler
