@@ -22,15 +22,16 @@ const mockResponse = jest.fn(() => {
         status: () => response.statusCode
     }
 })
-jest.mock('../service/member');
-const {Login} = require('../service/member')
-
-Login.mockImplementationOnce(() => Promise.resolve({
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
-    expiredAt: 1536944575901,
-    issuedAt: 1536944515901,
-}))
-.mockImplementationOnce(() => Promise.reject("invalid username, password"))
+jest.mock('../service/member', () => ({
+    Login: jest.fn().mockImplementationOnce(() => Promise.resolve({
+            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
+            expiredAt: 1536944575901,
+            issuedAt: 1536944515901,
+        }))
+        .mockImplementationOnce(() => Promise.reject("invalid username, password"))   
+}));
+const MemberService = require('../service/member')
+const LoginHandlerWithStubservice = LoginHandler(MemberService)
 
 describe('LoginHandler', () => {
     describe('Login Success', () => {
@@ -50,7 +51,7 @@ describe('LoginHandler', () => {
                 body: jsonData
             }
             const response = mockResponse()
-            return LoginHandler(request, response,() => {})
+            return LoginHandlerWithStubservice(request, response,() => {})
                 .then(() => {
                     expect(response.json()).toEqual(expectedResponse)
                     expect(response.status()).toEqual(expectedStatus)
@@ -71,7 +72,7 @@ describe('LoginHandler', () => {
                 body: jsonData
             }
             const response = mockResponse()
-            return LoginHandler(request, response,() => {})
+            return LoginHandlerWithStubservice(request, response,() => {})
                 .then(() => {
                     expect(response.json()).toEqual(expectedResponse)
                     expect(response.status()).toEqual(expectedStatus)
@@ -89,7 +90,8 @@ describe('LoginHandler', () => {
                 body: jsonData
             }
             const response = mockResponse()
-            return LoginHandler(request, response,() => {})
+            
+            return LoginHandlerWithStubservice(request, response,() => {})
                 .then(() => {
                     expect(response.json()).toEqual(expectedResponse)
                     expect(response.status()).toEqual(expectedStatus)

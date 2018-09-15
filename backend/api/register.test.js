@@ -23,16 +23,17 @@ const mockResponse = jest.fn(() => {
         status: () => response.statusCode
     }
 })
-jest.mock('../service/member');
-const {Register} = require('../service/member')
+jest.mock('../service/member', () => ({
+    Register: jest.fn().mockImplementation(() => Promise.resolve({
+        email: "golf.apipol@gmail.com",
+        fullname: "Apipol Sukgler",
+        phone: "0853872788"
+    }))
+}));
+const MemberService = require('../service/member')
+const RegisterHandlerWithStubservice = RegisterHandler(MemberService)
 
-Register.mockImplementation(() => Promise.resolve({
-    email: "golf.apipol@gmail.com",
-    fullname: "Apipol Sukgler",
-    phone: "0853872788"
-}))
-
-describe('LoginHandler', () => {
+describe('RegisterHandler', () => {
     it('Input E-mail: golf.apipol@gmail.com Password:123456789 Should Be generate new token', () => {
         expectedResponse = {
             email: "golf.apipol@gmail.com",
@@ -51,7 +52,7 @@ describe('LoginHandler', () => {
             body: jsonData
         }
         const response = mockResponse()
-        return RegisterHandler(request, response,() => {})
+        return RegisterHandlerWithStubservice(request, response,() => {})
             .then(() => {
                 expect(response.json()).toEqual(expectedResponse)
                 expect(response.status()).toEqual(expectedStatus)
