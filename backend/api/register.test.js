@@ -7,24 +7,21 @@ const mockResponse = jest.fn(() => {
     }
     return {
         send: (status,json) => {
-            console.log("status", status, "json", json)
             if (!json) {
                 json = status
                 status = 200
             }
             response.data = json
             response.statusCode = status
-            console.log("response", response)
         },
         json: () => {
-            console.log("json response", response)
             return response.data
         },
         status: () => response.statusCode
     }
 })
 jest.mock('../service/member', () => ({
-    Register: jest.fn().mockImplementation(() => Promise.resolve({
+    register: jest.fn().mockImplementation(() => Promise.resolve({
         email: "golf.apipol@gmail.com",
         fullname: "Apipol Sukgler",
         phone: "0853872788"

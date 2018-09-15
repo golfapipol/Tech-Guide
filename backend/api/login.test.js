@@ -23,7 +23,7 @@ const mockResponse = jest.fn(() => {
     }
 })
 jest.mock('../service/member', () => ({
-    Login: jest.fn().mockImplementationOnce(() => Promise.resolve({
+    login: jest.fn().mockImplementationOnce(() => Promise.resolve({
             token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c",
             expiredAt: 1536944575901,
             issuedAt: 1536944515901,

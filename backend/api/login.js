@@ -5,7 +5,7 @@ const LoginHandler = (MemberService) =>
             response.send(400, { response: "please input email and password" })
             return Promise.resolve(next())
         }
-        return MemberService.Login(email,password)
+        return MemberService.login(email,password)
             .then((data) => {
                 response.send(data)
                 return next()
