@@ -9,3 +9,11 @@ Please push your code to your Github and send the link to pichaya@getlinks.co
 3. Write unit test for each function above
 
 ---
+### To-do list
+
+- [x] Write Api Test with postman
+- [x] Unit Test (api, service layer)
+- [x] Implement Flow (register, login)
+- [x] Create script for database (member should have field salt for encryption check)
+- [ ] Write diagram
+- [ ] Enchance security (no one store raw password in database, must use encryption)
