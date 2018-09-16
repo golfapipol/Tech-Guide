@@ -4,9 +4,10 @@
   "description": "Please push your code to your Github and send the link to pichaya@getlinks.co",
   "main": "index.js",
   "scripts": {
+    "start": "./start.sh",
     "test": "npm run unit:test && npm run e2e:test",
     "unit:test": "jest",
-    "pree2e:test": "node ./index.js &",
+    "pree2e:test": "./start-background.sh",
     "e2e:test": "newman run ./atdd/api/getlinks.postman_collection.json",
     "poste2e:test": "kill $(ps aux | grep '[n]ode ./index.js' | awk '{print $2}')"
   },
@@ -14,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "jsonwebtoken": "^8.3.0",
+    "pg": "^7.4.3",
     "restify": "^7.2.1"
   },
   "devDependencies": {

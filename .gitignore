@@ -2,7 +2,7 @@ node_modules
 report.html
 log.html
 output.xml
-
+frontend/build
 # testing
 /coverage
 
