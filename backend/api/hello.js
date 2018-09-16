@@ -7,7 +7,7 @@ const HelloHandler = (request, response, next) => {
         return next()
     }
     if (!TokenService.check(token)) {
-        response.send(401, {response: "unauthorized"})
+        response.send(401, {response: "token already expired"})
         return next()
     }
     response.send("hello")
