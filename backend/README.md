@@ -17,3 +17,4 @@ Please push your code to your Github and send the link to pichaya@getlinks.co
 - [x] Create script for database (member should have field salt for encryption check)
 - [ ] Write diagram
 - [x] Enchance security (no one store raw password in database, must use encryption)
+- [ ] Move Authorize to be middleware
