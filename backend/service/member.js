@@ -14,8 +14,7 @@ const MemberService = (memberRepository) => ({
                     return Promise.reject("invalid username, password")
                 }
                 const actualPassword = SHA512(password, account.salt)
-                const realPassword = SHA512(account.password, account.salt)
-                if (realPassword.passwordHash != actualPassword.passwordHash) {
+                if (account.password != actualPassword.passwordHash) {
                     return Promise.reject("invalid username, password")
                 }
                 return Promise.resolve(TokenService.generate({email: account.email}))
