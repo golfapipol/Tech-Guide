@@ -11,6 +11,7 @@ const LoginHandler = (MemberService) =>
                 return next()
             })
             .catch((err) => {
+                console.error(err)
                 response.send(400, { response: err })
                 return next()
             })
