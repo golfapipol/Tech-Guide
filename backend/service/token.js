@@ -13,5 +13,13 @@ module.exports = {
             issuedAt: iat,
             expiredAt: exp
         }
-    }    
+    },
+    check: (token) => {
+        try {
+            jwt.verify(token, SECRET)
+            return true
+        } catch (err) {
+            return false
+        }
+    }   
 }
