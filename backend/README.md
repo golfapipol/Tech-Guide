@@ -16,4 +16,4 @@ Please push your code to your Github and send the link to pichaya@getlinks.co
 - [x] Implement Flow (register, login)
 - [x] Create script for database (member should have field salt for encryption check)
 - [ ] Write diagram
-- [ ] Enchance security (no one store raw password in database, must use encryption)
+- [x] Enchance security (no one store raw password in database, must use encryption)

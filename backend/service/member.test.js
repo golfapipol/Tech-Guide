@@ -1,15 +1,23 @@
 const MemberService = require('./member')
-
+jest.mock('../service/encryption', () => ({
+    generateSalt: jest.fn(() => "salt"),
+    SHA512: jest.fn().mockImplementation((password, salt) => 
+        ({
+            passwordHash: password,
+            salt
+        })
+    )
+}));
 const stubMemberRepository = {
     create: jest.fn()
-        .mockImplementationOnce((email, password, fullname, phone) => 
+        .mockImplementationOnce((email, password, salt, fullname, phone) => 
             Promise.resolve({
                 email, fullname, phone
             }))
         .mockImplementationOnce(() => Promise.reject("user already taken")),
     findByEmail: jest.fn()
-        .mockImplementationOnce((email) => Promise.resolve({email: email, password: "123456789"}))
-        .mockImplementationOnce((email) => Promise.resolve({email: email, password: "123456789"}))
+        .mockImplementationOnce((email) => Promise.resolve({email: email, password: "123456789", salt: "salt"}))
+        .mockImplementationOnce((email) => Promise.resolve({email: email, password: "123456789", salt: "salt"}))
         .mockImplementation(() => Promise.resolve(undefined))
     
 }

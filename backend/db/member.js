@@ -1,6 +1,6 @@
 const MemberRepository = (database) => ({
-    create: (email, password, fullname, phone) => 
-        database.query('INSERT INTO members(email, password, fullname, phone) VALUES($1, $2, $3, $4) RETURNING *', [email, password, fullname, phone])
+    create: (email, passwordHash, salt, fullname, phone) => 
+        database.query('INSERT INTO members(email, password, salt, fullname, phone) VALUES($1, $2, $3, $4, $5) RETURNING *', [email, passwordHash, salt, fullname, phone])
             .then((result) => {
                 if (!result.rows[0]) {
                     return Promise.reject("invalid username, password")
